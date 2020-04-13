@@ -1,11 +1,7 @@
 # Nextcloud docker-client
-This image provides you an alpine based image for syncing your files with a remote [nextcloud server ](https://nextcloud.com/)
+This image provides you an alpine based image for syncing your files with a remote [nextcloud server](https://nextcloud.com/)
 
-[![](https://images.microbadger.com/badges/image/juanitomint/nextcloud-client.svg)](https://microbadger.com/images/juanitomint/nextcloud-client "Get your own image badge on microbadger.com")
-[![](https://images.microbadger.com/badges/version/juanitomint/nextcloud-client.svg)](https://microbadger.com/images/juanitomint/nextcloud-client "Get your own version badge on microbadger.com")
-
-
-This image is based on the work made by: [Martin Peters](https://github.com/FreakyBytes)
+This image is based on the work by: [Juan Ignacio Borda](https://github.com/juanitomint)
 
 ## Example using local folder
 
@@ -13,7 +9,7 @@ This image is based on the work made by: [Martin Peters](https://github.com/Frea
       -v $(pwd)/sync-folder:/media/nextcloud \
       -e NC_USER=$username -e NC_PASS=$password \
       -e NC_URL=$server_url\
-      juanitomint/nextcloud-client
+      stoutyhk/nextcloud-client
 
 ## Example using a [named volume](https://docs.docker.com/storage/volumes/)
 
@@ -21,7 +17,21 @@ This image is based on the work made by: [Martin Peters](https://github.com/Frea
       -v some_named_volume:/media/nextcloud \
       -e NC_USER=$username -e NC_PASS=$password \
       -e NC_URL=$server_url\
-      juanitomint/nextcloud-client
+      stoutyhk/nextcloud-client
+
+## Example using a named volume and [config files](https://docs.nextcloud.com/desktop/2.6/advancedusage.html#nextcloud-command-line-client)
+
+    docker run -it --rm \
+      -v some_named_volume:/media/nextcloud \
+      -v some_config_volume:/config \
+      -e NC_USER=$username -e NC_PASS=$password \
+      -e NC_URL=$server_url\
+      stoutyhk/nextcloud-client
+
+The config folder can contain files named:
+
+* `exclude` - this contains files/folders/patterns that you don't want to sync
+* `unsyncedfolders` - contains the list of un-synced remote folders (selective sync)
 
 ## Example one time run
 
@@ -30,21 +40,21 @@ This image is based on the work made by: [Martin Peters](https://github.com/Frea
       -e NC_USER=$username -e NC_PASS=$password \
       -e NC_URL=$server_url\
       -e NC_EXIT=true\
-      juanitomint/nextcloud-client
-
+      stoutyhk/nextcloud-client
 
 replace:
- * $username
- * $password 
- * $server_url 
- 
+
+* $username
+* $password
+* $server_url
+
  with valid values for an existing and valid user on a Nextcloud Server.
 
 ## ENV variables to customize your deploy
-##### NC_USER 
-The user name to log in 
+##### NC_USER
+The user name to log in
 Default: username
-##### NC_PASS 
+##### NC_PASS
 Valid password for the user above in clear text
 Default: password
 
@@ -61,10 +71,9 @@ Sets the interval between syncs in seconds
 default: 300 (300 /60 = 5 Minutes)
 
 ##### NC_EXIT
-If "true" the sync will happen once and then the container will exit, very usefull for using 
-in conjunction with cron or schedulers
+If "true" the sync will happen once and then the container will exit, very useful for using in conjunction with cron or schedulers
 default: false
-example: 
+example: true
 ## Advanced settings
 
 ##### USER
@@ -92,6 +101,4 @@ whether or not nextcloud should be forced to sync hidden files
 
 default: false
 
-
-Any comment or propblem feel free to [fill an issue](https://github.com/juanitomint/nextcloud-client-docker/issues/new) or make a PR!
-
+Any comments or problems, feel free to [fill out an issue](https://github.com/jamesstout/nextcloud-client-docker/issues/new) or make a PR!
