@@ -84,12 +84,12 @@ default: ncsync
 ##### USER_GUID
 The system user group id inside the container you want to use for runing the sync
 
-default: 1000
+default: 100
 
 ##### USER_UID
 The system user id inside the container you want to use for runing the sync
 
-default: 1000
+default: 1026
 
 ##### NC_TRUST_CERT
 whether or not trust self signed certificates or invalid certificates
