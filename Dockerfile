@@ -1,4 +1,4 @@
-FROM alpine:3.20
+FROM alpine:3.21.0
 LABEL maintainer="stoutyhk" version="0.1" description="nextcloud sync client"
 LABEL based-on="https://github.com/juanitomint/nextcloud-client-docker"
 LABEL repo="https://github.com/jamesstout/nextcloud-client-docker"
